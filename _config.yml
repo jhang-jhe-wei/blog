@@ -37,7 +37,7 @@ social:
   email: jhang0912407249@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - hhttps://www.facebook.com/profile.php?id=100006651004776      # change to your facebook homepage
+    - https://www.facebook.com/profile.php?id=100006651004776      # change to your facebook homepage
     - https://github.com/jhang-jhe-wei       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
