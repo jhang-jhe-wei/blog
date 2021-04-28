@@ -4,8 +4,9 @@
   type: github
   icon: 'fab fa-github-alt'
 -
-  type: twitter
-  icon: 'fab fa-twitter'
+  type: Facebook
+  icon: 'fab fa-facebook-square'
+  url: 'https://www.facebook.com/profile.php?id=100006651004776'
 -
   type: email
   icon: 'fas fa-envelope'
