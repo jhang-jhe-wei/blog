@@ -17,7 +17,7 @@ tags:  [Jekyll]
 - [X] 知道如何~~亂改別人的Code~~使用Jekyll模板
 - [X] 幫你抓幾隻蟲、踩幾個雷，節省你好幾個小時的時間
 
-## 美化你的jekyll專案
+## 挑選Jekyll Template
 一個靜態網頁的生成器受歡迎程度除了本身的性能(速度、穩定度)外，有很大的因素取決於社群，關於Jekyll網路上有許多熱心人士提供各式各樣的主題，像是[jekyllthemes.org](http://jekyllthemes.org/)這個網站中就有各式各樣的模板供你選擇，但要特別注意的是不同的模板要求的jekyll版本也是會不同的。
 
 ![](https://i.imgur.com/xIZ9cqP.png)
@@ -29,8 +29,8 @@ tags:  [Jekyll]
 
 這些模板的提供者通常都會把使用說明放在Demo網站上，個人覺得這種做法非常的高效，充分的發揮了這個Demo的價值及教育意義。
 
+## 使用Theme Gem安裝Jekyll Template
 如果想要使用這個模板有很多種方式，這邊我們示範使用Theme Gem的方法
-### 使用Theme Gem
 
 1. 在Jekyll專案的GemFile中加入以下這段：
     `gem "jekyll-theme-chirpy"`
