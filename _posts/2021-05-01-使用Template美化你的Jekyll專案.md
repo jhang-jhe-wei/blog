@@ -66,6 +66,17 @@ tags:  [Jekyll]
     
 到這一步基本的建置功能就都已經完成了，在`_post/`中新增文章進行撰寫吧！
 
+## 更改專案中的favicon
+favicon就是在網站名稱左邊的小小圖片，這東西是可以自己定義的
+![](/assets/images/favicon-show.png)
+
+首先先到[Real Favicon Generator](https://realfavicongenerator.net/)選擇上傳要當作facicon的圖片，上傳會可以在最下面點擊`Generate your Favicons and HTML code`，即可得到一個zip的檔案
+
+解壓縮後刪除裡面的兩個東西：
+- browserconfig.xml
+- site.webmanifest
+
+之後把所有的圖片檔案都複製到自己專案中的`assets/img/favicons/`資料夾中，之後你就可以看到你的網站名稱旁已經有你剛剛放置的icon了。
 
 ## 部署Jekyll專案
 在本地端寫好檔案後我們就部署到Github Page上，關於如何部署請看[這裡](/posts/使用Jekyll自架部落格/#部署到github-page

@@ -24,7 +24,7 @@ tags:  [Jekyll]
 
 ## 安裝步驟
 以下步驟以[chirpy](https://chirpy.cotes.info/)這個模板為例。
-1. 下載[chirpy的Github](https://github.com/cotes2020/chirpy-starter.git)專案，並且複製其中的`tools/test.sh`和`tools/deploy.sh`到你自己的專案(請確保相對路徑與原專案相同)
+1. 下載[chirpy的Github專案](https://github.com/cotes2020/chirpy-starter.git)，並且複製其中的`tools/test.sh`和`tools/deploy.sh`到你自己的專案(請確保相對路徑與原專案相同)
 2. 在自己的專案下創建`.github/workflows/pages-deploy.yml`這個檔案，並且複製[該段程式碼](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/.github/workflows/pages-deploy.yml.hook)到檔案中。
 > 需要注意的是`on.push.branches`後面接的branch要是你Github Repository的預設branch，如果Ruby版本不同也要修改
 3. 由於Github Action上是Linux作業系統，因此請在自己的專案中運行以下指令：
