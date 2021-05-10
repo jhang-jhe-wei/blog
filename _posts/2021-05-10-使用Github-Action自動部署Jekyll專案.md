@@ -40,7 +40,11 @@ bundle lock --add-platform x86_64-linux
 ![](/assets/images/github-action.png)
 完成後你切換branch到`gh-pages`分支，你就可以看到機器人幫你把`_site/`推上這個分支了
 ![](/assets/images/github-action-deploy-finished.png)
-> 如果Action沒有過，可以註解掉`_config.yml`中的GA部分試試看
+
+## 踩坑紀錄
+依照以上的步驟通常可以幫你避開一些坑，但坑這種東西是永遠填不完的，最主要的問題在於test沒辦法過，假如你有這種情況可以試試以下動作：
+1. 如果沒有使用Google Analytics，可以註解掉`_config.yml`中的GA部分
+2. 不要填寫baseurl，這會導致test去找`_site$baseurl`，文件是預設你的Github Repository名稱是`<username>.github.io`，因此不會報錯，但假如你調皮的話......我也不知道該怎麼辦QQ
 
 ## 結語
 Github Action博大精深，我對他還只是初步的了解，大部分的設定也都是參考網路上的範例，希望之後有機會來好好的研究Github Action。
