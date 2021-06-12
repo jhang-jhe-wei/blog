@@ -35,39 +35,42 @@ tags:  [Rails]
 由於我們下載的是一個首頁的模板，為了不打亂原本的專案，因此我們另外創建一個Layout
 - `rails g controller landing`
 - 修改`landing_controller`中的內容
-
+把此段程式碼刪除
+```ruby
+class LandingController < ApplicationController
+end
 ```
--    class LandingController < ApplicationController
--    end
-
-+    class LandingController < ActionController::Base
-+        def index
-+        end
-+    end
+替換成以下
+```ruby
+class LandingController < ActionController::Base
+    def index
+    end
+end
 ```
 - 在`config/routes`中設定根路徑`root to: "landing#index"`
 - 在`app/views/landing`中新增`index.html.erb`，並且複製模板`dist/index.html`的`body`部分到`index.html.erb`
 - 在`app/views/layouts`中新增`landing.html.erb`，複製`app/views/layouts/application.html.erb`的內容到裡面
 - 把模板`dist/index.html`中的以下內容全部貼到`app/views/layouts/landing.html.erb`的`head`區塊
 
-```
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><script>
-<!-- Simple line icons-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/csssimple-line-icons.min.css" rel="stylesheet" type="text/css" />
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic700italic" rel="stylesheet" type="text/css" />
+    ```html
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"><script>
+    <!-- Simple line icons-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/csssimple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic700italic" rel="stylesheet" type="text/css" />
 
-```
+    ```
+    
 ### 使用Assets Pipeline 
 - 依照下方指示修改`app/views/layouts/landing.html.erb`
-
+把此段程式碼刪除
+```ruby
+<%= javascript_pack_tag 'application' %>
 ```
--    <%= stylesheet_pack_tag 'application', media: 'all' %>
--    <%= javascript_pack_tag 'application' %>
-+    <%= stylesheet_link_tag 'landing', media: 'all' %>
+替換成以下
+```ruby
+<%= stylesheet_link_tag 'landing', media: 'all' %>
 ```
 
 > 這一步是讓`landing`這個layout使用Assets Pipeline而並非Webpacker，並且使用`landing.scss`作為Stylesheet
