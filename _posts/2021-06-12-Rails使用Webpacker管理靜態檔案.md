@@ -13,7 +13,7 @@ tags:  [Rails]
 1. Webpacker
 2. Assets Pipeline
 
-雖然從Rails 6後預設使用 Webpacker 來管理 Javascript 並使用 Asset Pipeline 管理 CSS，但是要使用其中一邊管理全部的靜態資源也是可以的，因為[上篇](/posts/Rails使用Assets-Pipeline管理靜態檔案/index)已經寫過使用 Assets Pipeline 的方式管理靜態資料，因此本篇介紹使用 Webpacker 的方式來實作。
+雖然從Rails 6後預設使用 Webpacker 來管理 Javascript 並使用 Asset Pipeline 管理 CSS，但是要使用其中一邊管理全部的靜態資源也是可以的，因為[上篇](https://blog.wells.tw/posts/Rails%E4%BD%BF%E7%94%A8Assets-Pipeline%E7%AE%A1%E7%90%86%E9%9D%9C%E6%85%8B%E6%AA%94%E6%A1%88/)已經寫過使用 Assets Pipeline 的方式管理靜態資料，因此本篇介紹使用 Webpacker 的方式來實作。
 
 ## 操作步驟
 以下示範使用 Webpacker 搭配已經寫好的模板：
