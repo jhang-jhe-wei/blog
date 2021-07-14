@@ -11,7 +11,7 @@ tags:  [Jekyll]
 - [X] Jekyll Template
 
 ## 誰可以安心食用(適合誰讀)
-- [X] 看過前一篇文[使用Jekyll自架部落格](/posts/使用Jekyll自架部落格)
+- [X] 看過前一篇文[使用Jekyll自架部落格](../使用Jekyll自架部落格/index.html)
 
 ## 服用完你會獲得什麼
 - [X] 知道如何~~亂改別人的Code~~使用Jekyll模板

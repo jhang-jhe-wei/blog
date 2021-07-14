@@ -11,7 +11,7 @@ tags:  [Jekyll]
 - [X] Github Action的使用
 
 ## 誰可以安心食用(適合誰讀)
-- [X] 看過前一篇文[使用Template美化你的Jekyll專案](/posts/使用Template美化你的Jekyll專案)
+- [X] 看過前一篇文[使用Template美化你的Jekyll專案](../使用Template美化你的Jekyll專案/index.html)
 
 ## 服用完你會獲得什麼
 - [X] 使用Github Action讓你部署Jekyll專案變得更輕鬆
