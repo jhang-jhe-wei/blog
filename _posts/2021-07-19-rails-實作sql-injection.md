@@ -99,10 +99,9 @@ SELECT posts.* FROM posts WHERE (posts.title LIKE '%apple');DELETE FROM posts; -
 其實 Rails 的防止 SQL Injection 機制很完善，雖然並不保證百分之百不會被攻擊，通常 SQL Ingection 都發生在需要搭配變數的情況，常見的做法就是將所有會影響 SQL 的控制字元進行轉義，以下示範：
 
 ```diff
-- sql = "SELECT posts.* FROM posts WHERE (posts.title LIKE '%#{params[:search]}');"
-
-+ keyword = ActiveRecord::Base::connection.quote_string(params[:search])
-+ sql = "SELECT posts.* FROM posts WHERE (posts.title LIKE '%#{keyword}');"
+-   sql = "SELECT posts.* FROM posts WHERE (posts.title LIKE '%#{params[:search]}');"
++   keyword = ActiveRecord::Base::connection.quote_string(params[:search])
++   sql = "SELECT posts.* FROM posts WHERE (posts.title LIKE '%#{keyword}');"
 
 result = ActiveRecord::Base.connection.execute(sql)
 @posts = result.map { |p| OpenStruct.new p }
