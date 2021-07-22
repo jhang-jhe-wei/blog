@@ -107,7 +107,7 @@ devise :database_authenticatable, :registerable,
 def self.from_omniauth(auth)
     if auth.provider == "line"
         user = User.find_or_create_by(line_id: auth.uid)
-        user.update(name: auth.info.name)
+        user.update(name: auth.info.name, image_url: auth.info.image)
         user
     end
 end
