@@ -117,7 +117,7 @@ tags:  [Jekyll,Github-Page]
 寫完上面的文章開頭後，接著就可以用Markdown語法開開心心的進行內文書寫了～
 
 ### _drafts/
-這個資料夾是我們存放草稿的地方，預設是沒有這個資料夾的，需要自己新增，相比於`_post/`，`_drafts/`的文章並不會在你執行`bundle exec jekyll s`時出現，必須得在後面加入`--draft`才行。
+ 這個資料夾是我們存放草稿的地方，預設是沒有這個資料夾的，需要自己新增，相比於`_post/`，`_drafts/`的文章並不會在你執行`bundle exec jekyll s`時出現，必須得在後面加入`--draft`才行。
 
 ## 部署到Github Page
 ### 前言

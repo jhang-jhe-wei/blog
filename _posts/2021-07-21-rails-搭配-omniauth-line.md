@@ -11,7 +11,7 @@ tags:  [Rails]
 - 前置作業
 - 安裝相關套件
 - 生成 User Model
-- 設定 Line Login
+- 設定  Line Login
 - 新增身份驗證
 - 實作登入登出
 
@@ -73,7 +73,7 @@ end
 rails db:migrate
 ```
 
-## 設定 Line Login
+## 設定  Line Login
 新增 `.env` 並在其中放入以下內容：
 ```
 LINE_LOGIN_CHANNEL_ID= 你的 CHANNEL ID

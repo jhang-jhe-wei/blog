@@ -24,14 +24,14 @@ tags:  [GCP,DNS]
 
 ## 設定流程
 以下示範從購買域名到設定好對應的 IP
-1. 向域名註冊商購買域名
-2. 更改域名的名稱伺服器（Name Server）
+1. 向域名註冊商購買域名
+2.   更改域名的名稱伺服器（Name Server）
 3. 新增紀錄集
 
 ### 向域名代理商購買域名使用權
 目前市面上有許多域名註冊商，如 [Gandi](https://www.gandi.net/)、[GoDaddy](https://tw.godaddy.com/)甚至也可以在[google domains](https://domains.google.com/registrar/search)購買，隨便挑選一間即可，內容不會差多少。
 
-這邊我們以[Gandi](https://www.gandi.net/)為例，首先先搜尋自己想要的域名能不能購買
+這邊我們以[Gandi](https://www.gandi.net/)為例 ，首先先搜尋自己想要的域名能不能購買
 
 ![picture 2](/assets/images/2021-05-31-使用GCP設定DNS-4206095e809cdc4cf374f8d1d32370b98e675400d574ad6b7b16f064f35dc659.png)  
 依照畫面顯示，`abc987.tw`這個域名可以被購買，一般都是以年為單位計算。
@@ -47,14 +47,14 @@ tags:  [GCP,DNS]
 
 首先先找到GCP的Cloud DNS
 ![picture 4](/assets/images/2021-05-31-使用GCP設定DNS-9c4b0298c47f4521f27566f7ac021eb97305fbd6b0ac0f97f66eb5cf9d8d35da.png)  
-
+  
 進入後新增DNS區域，如下圖
 ![picture 5](/assets/images/2021-05-31-使用GCP設定DNS-d4ff48455f7cacacc36d0e810ee5ccbb0449afeb80a9f580de823a27fb51e091.png)  
 在DNS名稱的地方填入你購買的域名
 
 新增完成後你就可以看到你的以下這個畫面
-![picture 6](/assets/images/2021-05-31-使用GCP設定DNS-75d9677bfad32c6f70a48805ea3a4a55e4e49250f29ce5d6bf9a1b7167e7afe4.png)  
-之後把紅框中的內容貼到你購買域名的外部伺服器設定，這樣子使用GCP的名稱伺服器就設定完成了。
+ ![picture 6](/assets/images/2021-05-31-使用GCP設定DNS-75d9677bfad32c6f70a48805ea3a4a55e4e49250f29ce5d6bf9a1b7167e7afe4.png)  
+之後把紅框中的內容貼到你購買域名的外部伺服器設定 ，這樣子使用GCP的名稱伺服器就設定完成了。
 
 ### 新增紀錄集
 在完成上述兩個步驟後，你還是沒有辦法連到你的伺服器，因為你還缺少設定域名與 IP 的關係
@@ -64,7 +64,7 @@ tags:  [GCP,DNS]
 ![picture 7](/assets/images/2021-05-31-使用GCP設定DNS-834d0015a3d347b95bbaf56e5d65216f53c6fedf2351d96c195536ce32489eb4.png)  
 這裡我們可以看到資源紀錄類型是A，這也就是我們最常見的紀錄集`A record`，它用來設定域名與  IP 的關係，例如設定`abc.wells.tw`指向`33.23.141.32`，那麼我們在瀏覽器搜尋`abc.wells.tw`就會自動對應到`33.23.141.32`
 
-輸入完後按下新增，接著過一下再去瀏覽器搜尋`abc.wells.tw`你就可以連到你設定的 IP 了，或是使用[site24x7](https://www.site24x7.com/find-IP-address-of-web-site.html)來確認是不是有設定完成。
+輸入完後按下新增，接著過一下再去 瀏覽器搜尋`abc.wells.tw`你就可以連到你設定的 IP 了，或是使用[site24x7](https://www.site24x7.com/find-IP-address-of-web-site.html)來確認是不是有設定完成。
 
 ## 結語
 DNS的設定其實並不難，但是有很大一部分是對於網路的基礎知識並不了解，但只要從頭到尾~~踩過一次坑~~設定過一次，就可以應付大部分的情況了。

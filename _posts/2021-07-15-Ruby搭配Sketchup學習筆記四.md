@@ -7,7 +7,7 @@ tags:  [Ruby, Sketchup]
 
 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。
 ## 前情提要
-Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
+Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
 
 ## 本篇內容
 - 邊線(Edges)
@@ -413,7 +413,7 @@ Geom::Transformation 共有三種方法，分別是：
 - scaling：縮放
 
 ### Translation 轉移
-Translation 轉移所接受的參數是轉移前後的距離，共有 3 種方式可以執行，以下逐一示範：
+ Translation 轉移所接受的參數是轉移前後的距離，共有 3 種方式可以執行，以下逐一示範：
 ```ruby
 # Default code, use or delete...
 mod = Sketchup.active_model # Open model

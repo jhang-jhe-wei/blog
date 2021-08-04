@@ -13,7 +13,7 @@ tags:  ["Network security", Rails]
 - 修補方式
 
 ## 介紹
-SQL(結構化查詢語言)用於管理資料庫，由於其無法區分值和控制指令，因此惡意人士可以藉由在值中安插控制指令從而對資料庫進行惡意操作，這種操作稱為 SQL Injection。
+SQL(結構化查詢語言)用於管理資料庫，由於其無法區分值和控制指令， 因此惡意人士可以藉由在值中安插控制指令從而對資料庫進行惡意操作，這種操作稱為 SQL Injection。
 
 ## 入侵實作
 本範例使用 Ruby on Rails 6 進行實作。
@@ -55,8 +55,8 @@ rails db:migrate
 ```ruby
 root to: "posts#index"
 ```
-### 4. 新增搜尋功能
-在 `app/views/posts/index.html.erb` h1 之下新增以下內容：
+### 4. 新增搜尋功能
+在 `app/views/posts/index.html.erb` h1 之下新增以下內容：
 ```erb
 <%= form_tag(:posts, method: :get) do%>
   <%= label_tag(:search)%>
@@ -78,7 +78,7 @@ end
 ```
 之所以不能使用`Post.where()`是因為 Rails 有防止 SQL Injection 的機制，就算使用 `Post.where("id = #{params[id]}")` 依然會被擋下來。
 ### 5. 進行 SQL Injection
-此時執行 `rails s`，之後在瀏覽器輸入 `localhost:3000` 新增幾個 post 後，就可以看到類似以下的畫面：
+此時執行 `rails s`，之後在瀏覽器輸入 `localhost:3000` 新增幾個 post 後，就可以看到類似以下的畫面：
 ![picture 1](/assets/images/2021-07-19-sql-injection實作-14d771e7c31ecd9b9b46168991baf4d029dc9ec85c96045c027b8677306a54af.png)  
 之後我們在搜尋框中輸入 `apple');DELETE FROM posts; --`
 ![picture 2](/assets/images/2021-07-19-sql-injection實作-db30e557c85e6135d251cf8ef83a22d579fc6d3a77c74bb91bed5628b54152f9.png)  
@@ -119,7 +119,7 @@ Post.where(title: "test")
 ```ruby
 Post.where("title = #{var}")
 ```
-因為只要執行 `var = "' OR 1='1"` 後，上面的程式碼會被轉換成以下的 SQL 指令：
+因為 只要執行 `var = "' OR 1='1"` 後，上面的程式碼會被轉換成以下的 SQL 指令：
 ```sql
 SELECT "posts".* FROM "posts" WHERE (title = '' OR 1='1')
 ```

@@ -7,7 +7,7 @@ tags:  [Ruby, Sketchup]
 
 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。
 ## 前情提要
-Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
+Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
 
 ## 本篇內容
 - Ruby code editor 預設內容
@@ -26,7 +26,7 @@ Sketchup.active_model.entities.add_line [0,0,0],[9,9,9]
 
 在開啟 Ruby code editor 時，你的畫面應該會像這樣：
 ![picture 12](/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記二-696abd0707840f28900e5909762e8b37c4a03edfc6a5055be31e773fd91d9097.png)  
-點擊上方工具列的 `Edit/Edit Default Code` 後你可以看到此畫面
+ 點擊上方工具列的 `Edit/Edit Default Code` 後你可以看到此畫面
 ![picture 13](/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記二-3f17c71434ecdc23407d8434c57d799a7e3719de992e89697d52c41da973b1d0.png)
 不用更改任何內容，當我們再次開啟 Ruby code editor 時，就會有此預設的內容。
 
@@ -63,7 +63,7 @@ load 'test.rb'
 ## 畫五邊形
 在 Sketchup 中假如要畫一個五邊形，會使用線段來完成，而線段被視為邊緣物件(Edges)，有幾種做法，以下逐一介紹。
 ### 直線
-用直線畫五邊形應該是最容易想到的，程式碼如下：
+  用直線畫五邊形應該是最容易想到的，程式碼如下：
 ```ruby
 # Default code, use or delete...
 mod = Sketchup.active_model # Open model
@@ -84,7 +84,7 @@ ent.add_line pt5, pt1
 ```
 
 ### 曲線
-曲線其實就是直線的進階版，它可以接受多個點傳入，除了畫出五邊形之外，順便觀察它的 class 與 length，程式碼如下：
+  曲線其實就是直線的進階版，它可以接受多個點傳入，除了畫出五邊形之外，順便觀察它的 class 與 length，程式碼如下：
 ```ruby
 # Default code, use or delete...
 mod = Sketchup.active_model # Open model

@@ -7,7 +7,7 @@ tags:  [Ruby, Sketchup]
 
 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。
 ## 前情提要
-Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
+Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。
 
 ## 本篇內容
 - 對話方塊
@@ -201,7 +201,7 @@ wd.show
 ![picture 9](/assets/images/2021-07-16-Ruby搭配Sketchup學習筆記六-52d65ea954c0fb95acc22cfe3866fec5218dd97c278708a05e97317110aa7646.png)  
 
 ### 搭配 Javescript
-當 Ruby 想要傳送訊息到 Javascript 時可以使用 `wd.execute_script funcName(arg1,arg2)`，當 Javascript 想要傳送資料到 Ruby 時，可以在 Javascript 使用 `window.loaction = "skp:callback_name@callback_data"`
+ 當 Ruby 想要傳送訊息到 Javascript 時可以使用 `wd.execute_script funcName(arg1,arg2)`，當 Javascript 想要傳送資料到 Ruby 時，可以在 Javascript 使用 `window.loaction = "skp:callback_name@callback_data"`
 #### Ruby 傳資料給 Javascript
 先建立 `ex_909.rb`，程式碼如以下：
 ```ruby

@@ -6,8 +6,8 @@ tags:  [Rails]
 --- 
 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。
 
-## 簡介
-Rails專案中可能會有許多靜態的檔案，例如：JavaScript、Stylesheets 和圖檔，把所有的靜態檔案都放在`public`目錄或許是個選擇，但是檔案一多的時候，就不好管理了。
+## 簡介
+  Rails專案中可能會有許多靜態的檔案，例如：JavaScript、Stylesheets 和圖檔，把所有的靜態檔案都放在`public`目錄或許是個選擇，但是檔案一多的時候，就不好管理了。
 
 因此為了便於管理這些檔案，Rails 提供以下兩種方式：
 1. Webpacker
@@ -52,7 +52,7 @@ class LandingController < ActionController::Base
 end
 ```
 - 在 `config/routes` 中設定根路徑 `root to: "landing#index"`
-- 在 `app/views/landing` 中新增 `index.html.erb`，並且複製模板 `dist/index.html` 的 `body` 區塊到 `index.html.erb`
+- 在 `app/views/landing` 中新增 `index.html.erb`，並且複製模板 `dist/index.html` 的 `body` 區塊到 `index.html.erb`
 - 在 `app/views/layouts` 中新增 `landing.html.erb`，複製 `app/views/layouts/application.html.erb` 的內容到裡面
 - 把模板`dist/index.html`中的以下內容全部貼到`app/views/layouts/landing.html.erb`的`head`區塊
 

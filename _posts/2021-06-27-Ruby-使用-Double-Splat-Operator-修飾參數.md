@@ -17,14 +17,14 @@ end
 ```
 
 ## Double Splat Operator (**)
-使用 Double Splat Operator 修飾的參數會有以下幾個特性：
+使用 Double Splat Operator  修飾的參數會有以下幾個特性：
 1. 只能傳入 Hash
-2. 該參數為選填，不傳入時該參數會是`{}`
+2. 該參數為選填，不傳入時該參數會是`{}`
 3. 只能傳入一個 Hash，不像 Splat Operator (*)可以傳入多個引數
 4. 該參數需要放在最後
 5. 可以搭配關鍵字參數(Keyword Parameter)
 
-除了 **第4點** 和 **第5點** 外，使用 Double Splat Operator 修飾的參數與以下參數並無差別
+除了 **第4點** 和 **第5點** 外，使用 Double Splat Operator  修飾的參數與以下參數並無差別
 ```ruby
 def test(arg={})
     ...
