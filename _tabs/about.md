@@ -12,6 +12,9 @@ navigation: true
 
 在毫米隧道科技股份有限公司獲得經濟部創業歸故里數位應用獎後，我深感到自己技術上的不足，因此為了加強 Ruby on Rails 的能力，我進入了愛好資訊科技公司，該公司的負責人是 Ruby on Rails 界的名人 ihower，一位從Rails1.1用到Rails6.1的資深老司機，在進入這間公司後，我了解到了何謂專業和有系統化的進行專案，光是如何使用 Git 與同事合作就有許多可以學習的內容，這過程中也很感謝 ihower 給予我許多的資源進行學習，讓我不只對於 Ruby on Rails 更加熟悉，對於專業更有了進一步的認知。
 
+- 開發[網站監控系統](https://uptime.tw/)
+- 升級 [https://jobs.ruby.tw/](https://jobs.ruby.tw/) 網站，Rails 4.2 ~ Rails 6.1
+
 ---
 
 ## 毫米隧道科技股份有限公司｜資訊長
