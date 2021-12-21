@@ -1,0 +1,479 @@
+<!DOCTYPE html><html lang="Zh-TW" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="pv-proxy-endpoint" content=" https://wells-blog.appspot.com/query?id=agxufndlbGxzLWJsb2dyFQsSCEFwaVF1ZXJ5GICAgOjXh4EJDA"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="Ruby 搭配 Sketchup 學習筆記(四)" /><meta property="og:locale" content="Zh_TW" /><meta name="description" content="我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。" /><meta property="og:description" content="我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。" /><link rel="canonical" href="https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/" /><meta property="og:url" content="https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/" /><meta property="og:site_name" content="wells’s blog" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2021-07-15T09:00:00+08:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Ruby 搭配 Sketchup 學習筆記(四)" /><meta name="twitter:site" content="@twitter_username" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"datePublished":"2021-07-15T09:00:00+08:00","description":"我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。","mainEntityOfPage":{"@type":"WebPage","@id":"https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/"},"url":"https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/","@type":"BlogPosting","headline":"Ruby 搭配 Sketchup 學習筆記(四)","dateModified":"2021-08-04T11:27:57+08:00","@context":"https://schema.org"}</script><title>Ruby 搭配 Sketchup 學習筆記(四) | wells's blog</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://wells-blog.r.appspot.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://wells-blog.r.appspot.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="https://cdn.jsdelivr.net/npm/countup.js@1.9.3/dist/countUp.min.js"></script> <script async src="/assets/js/dist/pvreport.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-195452155-1"></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-195452155-1'); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/profile.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">wells's blog</a></div><div class="site-subtitle font-italic">當有人問我學過什麼<br>這裡就是我最好的回答</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/jhang-jhe-wei" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://www.facebook.com/profile.php?id=100006651004776" aria-label="Facebook" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-facebook-square"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['jhang0912407249','gmail.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>Ruby 搭配 Sketchup 學習筆記(四)</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>Ruby 搭配 Sketchup 學習筆記(四)</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> 張哲瑋 </span> <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Thu, Jul 15, 2021, 9:00 AM +0800" prep="on" > Jul 15 <i class="unloaded">2021-07-15T09:00:00+08:00</i> </span></div><div> <span> <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Wed, Aug 4, 2021, 11:27 AM +0800" prefix="Updated " > Aug 4 <i class="unloaded">2021-08-04T11:27:57+08:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="3936 words">21 min</span> <span id="pv" class="pageviews"><i class="fas fa-spinner fa-spin fa-fw"></i></span></div></div><div class="post-content"><p>我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。</p><h2 id="前情提要">前情提要</h2><p>Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利用文章來記錄所學的一點一滴。</p><h2 id="本篇內容">本篇內容</h2><ul><li>邊線(Edges)<li>向量<li>二維表面<li>三維物體<li>文字<li>轉形</ul><h2 id="邊線edge">邊線(Edge)</h2><p>邊線(Edge)是一個物件，還記得之前畫直線跟畫圓形時最大的差別在於畫圓形回傳的是一個 Array，嚴格來說是一個由 Edge 組成的 Array，而 Entity 提供一個方法可以讓我們以其中一個 Edge 得到其相連的全部 Edges，以下為程式碼：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+<span class="n">origin</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">normal</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">polygon</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_ngon</span> <span class="n">origin</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="mi">6</span>
+<span class="n">entity1</span> <span class="o">=</span> <span class="n">ent</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># ent[0] 是 Steve</span>
+
+<span class="n">edges</span> <span class="o">=</span> <span class="n">entity1</span><span class="p">.</span><span class="nf">all_connected</span>
+<span class="nb">puts</span> <span class="n">edges</span><span class="p">.</span><span class="nf">to_s</span>
+</pre></table></code></div></div><p>輸出：</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[#&lt;Sketchup::Edge:0x00007f87663ce688&gt;, #&lt;Sketchup::Edge:0x00007f87663ce728&gt;, #&lt;Sketchup::Edge:0x00007f87663ce700&gt;, #&lt;Sketchup::Edge:0x00007f87663ce6d8&gt;, #&lt;Sketchup::Edge:0x00007f87663ce6b0&gt;, #&lt;Sketchup::Edge:0x00007f87663ce750&gt;]
+true
+</pre></table></code></div></div><p>經由 <code class="language-plaintext highlighter-rouge">.all_connected</code> 我們可以得到整個 Array，這在之後建立表面時十分有用。</p><p>Edge 提供了幾個有用的方法：</p><ul><li>length：取得直線長度(單位為目前設定的度量單位)<li>start：傳回起點(Vertex 物件)<li>end：傳回終點(Vertex 物件)<li>vertices：傳回兩的端點(由 Vertex 物件組成的 Array)<li>other_vertex：提供一個端點作為參數，回傳另一個端點<li>split：分割直線；需傳入該直線上的一個端點，分割後為新直線的端點<li>used_by?：判斷指定的端點是否在直線上</ul><p>以下程式碼可供測試：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="n">test_line</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span><span class="p">.</span><span class="nf">entities</span><span class="p">.</span><span class="nf">add_line</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">test_line</span><span class="p">.</span><span class="nf">length</span> <span class="c1"># 1' 3/4</span>
+<span class="n">new_line</span> <span class="o">=</span> <span class="n">test_line</span><span class="p">.</span><span class="nf">split</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">test_line</span><span class="p">.</span><span class="nf">length</span> <span class="c1"># 8 1/2</span>
+<span class="n">new_line</span><span class="p">.</span><span class="nf">length</span> <span class="c1"># 4 1/4</span>
+<span class="n">test_line</span><span class="p">.</span><span class="nf">start</span><span class="p">.</span><span class="nf">position</span> <span class="c1"># (0", 0", 0")</span>
+<span class="n">vertex2</span> <span class="o">=</span> <span class="n">test_line</span><span class="p">.</span><span class="nf">end</span>
+<span class="n">vertex2</span><span class="p">.</span><span class="nf">position</span> <span class="c1"># (6", 6", 0")</span>
+
+<span class="n">vertex1</span> <span class="o">=</span> <span class="n">test_line</span><span class="p">.</span><span class="nf">other_vertex</span> <span class="n">vertex2</span>
+<span class="n">vertex1</span><span class="p">.</span><span class="nf">position</span> <span class="c1"># (0", 0", 0")</span>
+<span class="n">new_line</span><span class="p">.</span><span class="nf">start</span><span class="p">.</span><span class="nf">position</span> <span class="c1"># (6", 6", 0")</span>
+<span class="n">new_line</span><span class="p">.</span><span class="nf">end</span><span class="p">.</span><span class="nf">position</span> <span class="c1"># (9", 9", 0")</span>
+<span class="n">test_line</span><span class="p">.</span><span class="nf">used_by?</span> <span class="n">vertex1</span> <span class="c1"># true</span>
+<span class="n">new_line</span><span class="p">.</span><span class="nf">used_by?</span> <span class="n">vertex1</span> <span class="c1"># false</span>
+</pre></table></code></div></div><h2 id="向量">向量</h2><p>在 Sketchup 中畫直線時，經由起點和終點可以產生出向量，而在二維表面中，向量則決定該面該朝哪一個方向。例如希望做一個垂直於 X 軸的表面，該向量就會是 [1,0,0]。</p><h2 id="二維表面">二維表面</h2><h3 id="建立第一個二維表面">建立第一個二維表面</h3><p>要生成二維表面有個前提，就是必須用 Edges 圍成一個封閉的區域，要生成二維表面使用的是 <code class="language-plaintext highlighter-rouge">.add_face</code>，之後傳入一個由 Edges 組成的 Array，因此可以先生成一個幾何圖形，之後再用該回傳的物件生成表面。以下示範製作一個矩形表面：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">pt1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt3</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">pt1</span><span class="p">,</span><span class="n">pt2</span><span class="p">,</span><span class="n">pt3</span><span class="p">,</span><span class="n">pt4</span>
+</pre></table></code></div></div><p>執行結果： <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-3c29f6d4c89f6b505a502954dd92976d90f426dfc07136151e30ffe0b506e199.png" alt="picture 1" /><br /> 之後我們可以來看一下產生一個表面對於 Entity 的影響，以下是 Ruby Console：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="o">&gt;</span> <span class="n">ent</span><span class="p">.</span><span class="nf">size</span>
+<span class="mi">1</span>
+<span class="o">&gt;</span> <span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">pt1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt3</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">pt1</span><span class="p">,</span><span class="n">pt2</span><span class="p">,</span><span class="n">pt3</span><span class="p">,</span><span class="n">pt4</span>
+
+<span class="c1">#&lt;Sketchup::Face:0x00007f8765c67b10&gt;</span>
+<span class="o">&gt;</span> <span class="n">ent</span><span class="p">.</span><span class="nf">size</span>
+<span class="mi">6</span>
+</pre></table></code></div></div><p>可以發現在生成表面後，Entity 的 size 從 1 變成了 6，也就是一次增加了 5 個實體物件，而這 5 個物件分別是：</p><ol><li>表面<li>端點1<li>端點2<li>端點3<li>端點4</ol><p>這 ５ 個物件是一個陣列，指的是這個平面物件。之後我們先選取的方式來確認這 4 個端點：</p><ol><li>先點擊該平面<li>執行以下程式碼：</ol><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">sel</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">selection</span> <span class="c1"># Current selection</span>
+
+<span class="n">vertices</span> <span class="o">=</span> <span class="n">sel</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">vertices</span>
+
+<span class="no">UI</span><span class="p">.</span><span class="nf">messagebox</span> <span class="s2">"第一個端點</span><span class="si">#{</span><span class="n">vertices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">position</span><span class="p">.</span><span class="nf">cm</span><span class="si">}</span><span class="se">\n</span><span class="s2">第二個端點</span><span class="si">#{</span><span class="n">vertices</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">position</span><span class="p">.</span><span class="nf">cm</span><span class="si">}</span><span class="se">\n</span><span class="s2">第三個端點</span><span class="si">#{</span><span class="n">vertices</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nf">position</span><span class="p">.</span><span class="nf">cm</span><span class="si">}</span><span class="se">\n</span><span class="s2">第四個端點</span><span class="si">#{</span><span class="n">vertices</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="nf">position</span><span class="p">.</span><span class="nf">cm</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+</pre></table></code></div></div><p>結果： <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-20f85cc50b8f491d965ce9284ee0ecf9be7054aba4a58c1aa38480537c7296ae.png" alt="picture 2" /></p><h3 id="face-物件搭配向量">Face 物件搭配向量</h3><p>依照上方的結果，我們可以發現一件事(單位問題請省略)，那就是寫入的端點順序與真正的端點順序並不相同，經由「右手四指定則」的四指和該端點的順序相比，可以發現大拇指是朝下的，也就是向量為 [0,0,-1]，那該如何修正呢？可以使用以下指令：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="n">test_face</span><span class="p">.</span><span class="nf">normal</span> <span class="c1"># 確認修改之前的向量</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">reverse!</span> <span class="c1"># 把向量方向反轉</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">normal</span> <span class="c1"># 再次確認向量</span>
+</pre></table></code></div></div><h3 id="face-類別的方法">Face 類別的方法</h3><p>以下紀錄幾個有用的方法</p><ul><li>area：回傳表面的面積<li>edges：回傳組成表面的 Edges 陣列<li>followme：沿著 Edges 陣列建立 3D 圖形<li>pushpull：用來推拉表面形成 3D 圖形<li>classify_point：回傳指定點在表面上的位置代表值<ul><li>0：無法判斷<li>1：點在表面上<li>2：點在端點上<li>4：點在邊線上<li>16：點在表面同一平面的外側或空洞中<li>32：點不在表面平面上</ul></ul><h2 id="三維物體">三維物體</h2><p>三維物體可以藉由二維表面拉抬而成，以下紀錄兩種方法</p><h3 id="pushpull-方法">pushpull 方法</h3><p>pushpull 會將該二維表面依向量拉抬。範例程式碼示範如何製作一個立方體：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">test_face</span><span class="p">.</span><span class="nf">pushpull</span> <span class="mi">10</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-03ab5610c213d71b0a266b87dd27b08ecd35c2d401f57703f26dfc67b3decef4.png" alt="picture 4" /><br /> 為什麼是往下的呢？抓出 test_face 的四個 vertex 再用「右手定則」比比看吧。</p><p>如果希望把它切角的話，該怎麼做呢？</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">test_face</span><span class="p">.</span><span class="nf">reverse!</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">pushpull</span> <span class="mi">10</span>
+
+<span class="n">cut_line</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_line</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="c1"># 將表面一分為二</span>
+
+<span class="n">cut_line</span><span class="p">.</span><span class="nf">faces</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">pushpull</span> <span class="o">-</span><span class="mi">10</span> <span class="c1"># 將第二個表面往下壓</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-b7305d2c08201cc12950f5f58d7af97d2851bb4ca58b7337e3829319a58cacc7.png" alt="picture 6" /><br /> 在這個正方體的表面新增一條線，將此表面拆為兩份，並且將第二份往下壓。</p><h3 id="followme-方法">followme 方法</h3><p>followme 與 pushpull 的差別在於其可以依照指定的路徑拉出三維圖形，也因此其可以不用考慮目前表面的向量，試想想你該如何用 pushpull 拉出一個有弧度的圓柱體呢？這一點 followme 輕鬆就能做到。</p><h4 id="立方體">立方體</h4><p>同樣先建立一個立方體，這次使用 followme：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">depth</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">pt1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt3</span> <span class="o">=</span> <span class="p">[</span><span class="n">width</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">pt4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">pt1</span><span class="p">,</span> <span class="n">pt2</span><span class="p">,</span> <span class="n">pt3</span><span class="p">,</span> <span class="n">pt4</span>
+
+<span class="n">point1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span> <span class="n">point2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_line</span> <span class="n">point1</span><span class="p">,</span> <span class="n">point2</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">followme</span> <span class="n">path</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-63612ba44274c30195f5ee34e3f8c747ccdec939d04efdbd20e8bac07e41ada3.png" alt="picture 7" /><br /> 其實還滿好理解的，假如要用 followme 的話，我們只需要給它一條線，之後他就會沿著這條線拉出立體圖了。</p><h4 id="立方體切邊">立方體切邊</h4><p>接著來看看假如想要將立方體周邊的角都去掉，該怎麼做：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">pushpull</span> <span class="o">-</span><span class="mi">10</span>
+
+<span class="n">cut</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_line</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">cut</span><span class="p">.</span><span class="nf">faces</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">followme</span> <span class="n">test_face</span><span class="p">.</span><span class="nf">edges</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-25d2c73900f1dc4e6c2a0edeb532315760e023791bf8aad7f065a4a7d1869174.png" alt="picture 8" /><br /> 還記得 edges 是什麼嗎？就是表面周圍的邊。</p><h4 id="圓柱彎管">圓柱彎管</h4><p>在這範例中，我們先建立一個圓形的表面，然後使用三角函數 sin 製作一個弧度路徑，之後使用 followme沿著這條路徑生成，最後再把這條路徑刪除。</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="c1"># 製作圓形表面</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_circle</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">5</span> <span class="c1"># 畫一個圓框</span>
+<span class="n">circle_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">circle</span> <span class="c1"># 使用圓框製作平面</span>
+
+<span class="c1"># 製作路徑</span>
+<span class="n">pt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">135</span>
+  <span class="n">pt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="no">Math</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="nf">degrees</span><span class="p">),</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">end</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_curve</span> <span class="n">pt</span>
+
+<span class="c1"># 沿著路徑生成立體圖形</span>
+<span class="n">circle_face</span><span class="p">.</span><span class="nf">followme</span> <span class="n">path</span>
+
+<span class="c1"># 刪除路徑</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">erase_entities</span> <span class="n">path</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-da3e85e020dcf7afecbe4f892eea8c2cdfca564b37156139c9776051631b9e2b.png" alt="picture 9" /></p><h4 id="球體和甜甜圈">球體和甜甜圈</h4><p>要做出球體的道理很簡單，就跟把硬幣旋轉一樣，原本硬幣是圓形平面，當把它旋轉時，它將變成一個球體，在 Sketchup 中也是類似的做法，請看以下：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># 製作圓形表面</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_circle</span> <span class="n">center</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">radius</span> <span class="c1"># 畫一個圓框</span>
+<span class="n">circle_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">circle</span> <span class="c1"># 使用圓框製作平面</span>
+
+<span class="c1"># 製作路徑</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_circle</span> <span class="n">center</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">radius</span><span class="o">+</span><span class="mi">1</span> <span class="c1"># 要比半徑大一點，不然刪不掉</span>
+
+<span class="c1"># 沿著路徑生成立體圖形</span>
+<span class="n">circle_face</span><span class="p">.</span><span class="nf">followme</span> <span class="n">path</span>
+
+<span class="c1"># 刪除路徑</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">erase_entities</span> <span class="n">path</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-552b1dda26b2fd32513e40c26822d7f9a7e718683236fa912dac2b1533dd334a.png" alt="picture 10" /><br /> 我們將二維表面與路徑做垂直，之後直接 followme 就可以得到這個結果。</p><p>假如我們把路徑的中心點偏移一點的話…</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">radius</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="c1"># 製作圓形表面</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_circle</span> <span class="n">center</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">radius</span> <span class="c1"># 畫一個圓框</span>
+<span class="n">circle_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="n">circle</span> <span class="c1"># 使用圓框製作平面</span>
+
+<span class="c1"># 製作路徑</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_circle</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">radius</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># 要比半徑大一點，不然刪不掉</span>
+
+<span class="c1"># 沿著路徑生成立體圖形</span>
+<span class="n">circle_face</span><span class="p">.</span><span class="nf">followme</span> <span class="n">path</span>
+
+<span class="c1"># 刪除路徑</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">erase_entities</span> <span class="n">path</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-168ede2db56f8d559a47969ae18b57102e7470cdb3d4fc2554e32a2e056ec1b2.png" alt="picture 11" /><br /> 看呀！它就變成甜甜圈了。</p><h2 id="文字">文字</h2><h3 id="二維文字">二維文字</h3><p>二維文字通常用作標示用途，其有 overloading 兩種用法，第一種是傳入兩個參數，第二種是傳入三個參數，以下看比較：</p><div class="table-wrapper"><table><thead><tr><th>參數數量<th>第一個參數<th>第二個參數<th>第三個參數<tbody><tr><td>2<td>放置要呈現的文字<td>文字開頭位置<td> <tr><td>3<td>放置要呈現的文字<td>箭頭開頭位置<td>箭頭結束位置(空格後文字開頭)</table></div><p>測試看看：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">ent</span><span class="p">.</span><span class="nf">add_text</span> <span class="s2">"這是兩個參數的 add_text！"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">add_text</span> <span class="s2">"這是三個參數的 add_text！"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-05f42736d810aaa31e793d2c2f55f2b32b80123dd00a0effb7a4094fcf19b761.png" alt="picture 12" /></p><p>除此之外 Text 還有幾個方法可以用：</p><ul><li>text=：顯示的文字<li>point=：文字起點或箭頭起點<li>vector=：箭頭引出現終點的位置<li>line_weight=：引出線的粗細<li>arrow_type=：箭頭的外觀<ul><li>0：隱藏箭頭<li>1：橫線形<li>2：點形<li>3：封閉形<li>4：開放形</ul><li>leader_type=：引出線的樣式<ul><li>0：不作用<li>1：檢視型(不會隨著檢視角度變化)<li>2：圖釘型(隨著檢視角度變化)</ul></ul><h3 id="三維文字">三維文字</h3><p>三維文字通常都是模型的一部分，使用三維文字的方法是 <code class="language-plaintext highlighter-rouge">.add_3d_text</code>，當然它還是在 Entity 類別之下，使用這個方法的參數有不少，以下是其參數：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre> <span class="p">.</span><span class="nf">add_3d_text</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">alignment</span><span class="p">,</span> <span class="n">fontname</span><span class="p">,</span> <span class="n">bold</span><span class="p">,</span> <span class="n">inalic</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">,</span> <span class="n">baseZ</span><span class="p">,</span> <span class="n">filled</span><span class="p">,</span> <span class="n">extrusion</span><span class="p">)</span>
+</pre></table></code></div></div><p>基本上還滿好理解，除了幾個比較特別的額外介紹：</p><ul><li>tolerance：可以把它當作解析度，但這個值越高，品質越差<li>baseZ：Z軸的尺寸<li>filled：是否為實心字<li>extrusion：若為實心字，設定三維文字的深度</ul><p>範例程式碼：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">string</span> <span class="o">=</span> <span class="s2">"Hello, World"</span>
+
+<span class="n">ent</span><span class="p">.</span><span class="nf">add_3d_text</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="no">TextAlignLeft</span><span class="p">,</span> <span class="s2">"Arial"</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">false</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+</pre></table></code></div></div><p>執行結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-6681de70fe7be66cc2fa41ff7e242edee46682a201af7cca6c4331f3f8ba0907.png" alt="picture 13" /></p><h2 id="轉形">轉形</h2><p>轉型可以來進行移動、旋轉和縮放，在 Entities 類別中提供了 transform_entities 的方法，以下是範例：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">test_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">test_face</span><span class="p">.</span><span class="nf">pushpull</span> <span class="mi">10</span>
+
+<span class="n">roof_line</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_line</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">translation</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">tr</span><span class="p">,</span> <span class="n">roof_line</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-7526010c8491a4afdcdc7ec415ba8e34b1c2ad20fe6044e3ccf574fbbb883d7e.png" alt="picture 14" /><br /> 是不是覺得很神奇，怎麼突然就有個屋頂，依我的理解，此段程式應該是當 roof_line 建立時，因為上 test_face 的表面上，因此它會將該表面畫分為二，當 roof_line 被拉到 [0,0,10] 時，由於物件相連，因此那兩個表面也會被拉抬。</p><p>Geom::Transformation 共有三種方法，分別是：</p><ul><li>translation：轉移<li>ratation：旋轉<li>scaling：縮放</ul><h3 id="translation-轉移">Translation 轉移</h3><p>Translation 轉移所接受的參數是轉移前後的距離，共有 3 種方式可以執行，以下逐一示範：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">tran_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 第一種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">new</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+
+<span class="c1"># 第二種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">translation</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+
+<span class="c1"># 第三種</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="p">[</span><span class="o">-</span><span class="mi">13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">tran_face</span>
+</pre></table></code></div></div><p>最後輸出只會看到結果，假如想到確認每一步，可以按下 ctrl+z 一步一步退回。</p><h3 id="ratation-旋轉">Ratation 旋轉</h3><p>旋轉的需要三個資訊，分別是：</p><ol><li>旋轉的定點<li>旋轉的軸<li>旋轉的角度</ol><p>以下示範旋轉的做法：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">tran_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 第一種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">new</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">30</span><span class="p">.</span><span class="nf">degrees</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+
+<span class="c1"># 第二種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">rotation</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">.</span><span class="nf">degrees</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-b9ed05b6c6e47a6508f9f088afab0e29ef720d776971bc857e707a58632d2231.png" alt="picture 15" /><br /> 第二個參數一樣可以用「右手定則輔助」。</p><h3 id="scaling-縮放">Scaling 縮放</h3><p>縮放要特別注意的是除了面積會縮小外，端點也會縮小。</p><p>以下示範縮放：</p><div class="language-ruby highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="c1"># Default code, use or delete...</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="no">Sketchup</span><span class="p">.</span><span class="nf">active_model</span> <span class="c1"># Open model</span>
+<span class="n">ent</span> <span class="o">=</span> <span class="n">mod</span><span class="p">.</span><span class="nf">entities</span> <span class="c1"># All entities in model</span>
+
+<span class="n">tran_face</span> <span class="o">=</span> <span class="n">ent</span><span class="p">.</span><span class="nf">add_face</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 第一種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">new</span> <span class="mf">0.5</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+
+<span class="c1"># 第二種</span>
+<span class="n">t</span> <span class="o">=</span> <span class="no">Geom</span><span class="o">::</span><span class="no">Transformation</span><span class="p">.</span><span class="nf">scaling</span> <span class="mf">0.5</span>
+<span class="n">ent</span><span class="p">.</span><span class="nf">transform_entities</span> <span class="n">t</span><span class="p">,</span> <span class="n">tran_face</span>
+</pre></table></code></div></div><p>輸出結果：</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/images/2021-07-13-Ruby搭配Sketchup學習筆記四-d99ec012fd9b4f342ba8561e0626fc2163dfde8ce4752d2fc1d404c145c03763.png" alt="picture 16" /><br /> 因為縮小的 0.5 倍兩次，因此為原本的 0.25 倍。</p><p><code class="language-plaintext highlighter-rouge">Geom::Transformation.scaling</code> 總共有 overloading 四種定義，以下逐一說明：</p><div class="table-wrapper"><table><thead><tr><th>參數數量<th>第一個參數<th>第二個參數<th>第三個參數<th>第四個參數<tbody><tr><td>1<td>比例<td> <td> <td> <tr><td>2<td>新原點<td>比例<td> <td> <tr><td>3<td>X軸比例<td>Y軸比例<td>Z軸比例<td> <tr><td>4<td>新原點<td>X軸比例<td>Y軸比例<td>Z軸比例</table></div><p>以上共四種，但要特別注意的是新原點也會受到比例縮放的影響。</p><h4 id="綜合應用">綜合應用</h4><p>轉形共有 3 種不同的功用，那假如想要轉移之後旋轉，是不是就要寫兩段呢？其實不用，只要把轉移和移動 <code class="language-plaintext highlighter-rouge">Geom::Transformation.new</code> 出來的物件以 <code class="language-plaintext highlighter-rouge">*</code> 進行連接即可。</p><blockquote><p>請注意，假如是 <code class="language-plaintext highlighter-rouge">total = t_rotation * t_translation</code>的話，會是先轉移再旋轉，也就是右邊的先執行</p></blockquote><h2 id="參考資料">參考資料</h2><ul><li><a href="https://www.books.com.tw/products/0010683532">當SketchUp遇見Ruby：邁向程式化建模之路</a></ul></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/note/'>Note</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/ruby/" class="post-tag no-text-decoration" >Ruby</a> <a href="/tags/sketchup/" class="post-tag no-text-decoration" >Sketchup</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=Ruby 搭配 Sketchup 學習筆記(四) - wells's blog&url=https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=Ruby 搭配 Sketchup 學習筆記(四) - wells's blog&u=https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=Ruby 搭配 Sketchup 學習筆記(四) - wells's blog&url=https://blog.wells.tw/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/JAVA%E5%AF%A6%E4%BD%9C%E6%98%9F%E9%9A%9B%E5%A4%A7%E6%88%B0/">JAVA 實作星際大戰</a><li><a href="/posts/C++%E5%AF%A6%E4%BD%9C%E4%B8%AD%E5%9C%8B%E8%B1%A1%E6%A3%8B/">C++ 實作中國象棋</a><li><a href="/posts/C++%E5%AF%A6%E4%BD%9C%E5%A4%A7%E5%AF%8C%E7%BF%81/">C++ 實作大富翁</a><li><a href="/posts/x86%E7%B5%84%E8%AA%9E%E5%AF%A6%E4%BD%9C%E6%A4%8D%E7%89%A9%E5%A4%A7%E6%88%B0%E6%AE%AD%E5%B1%8D/">x86 組合語言實作植物大戰殭屍</a><li><a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%9B%9B/">Ruby 搭配 Sketchup 學習筆記(四)</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/ruby/">Ruby</a> <a class="post-tag" href="/tags/sketchup/">Sketchup</a> <a class="post-tag" href="/tags/rails/">Rails</a> <a class="post-tag" href="/tags/final-project/">Final Project</a> <a class="post-tag" href="/tags/stm32/">STM32</a> <a class="post-tag" href="/tags/jekyll/">Jekyll</a> <a class="post-tag" href="/tags/ai/">AI</a> <a class="post-tag" href="/tags/c/">C++</a> <a class="post-tag" href="/tags/electrical-installations/">Electrical-Installations</a> <a class="post-tag" href="/tags/gcp/">GCP</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E4%BA%94/"><div class="card-body"> <span class="timeago small" > Jul 16 <i class="unloaded">2021-07-16T09:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Ruby 搭配 Sketchup 學習筆記(五)</h3><div class="text-muted small"><p> 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利...</p></div></div></a></div><div class="card"> <a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E5%85%AD/"><div class="card-body"> <span class="timeago small" > Jul 16 <i class="unloaded">2021-07-16T09:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Ruby 搭配 Sketchup 學習筆記(六)</h3><div class="text-muted small"><p> 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利...</p></div></div></a></div><div class="card"> <a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E4%B8%83/"><div class="card-body"> <span class="timeago small" > Jul 17 <i class="unloaded">2021-07-17T09:00:00+08:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>Ruby 搭配 Sketchup 學習筆記(七)</h3><div class="text-muted small"><p> 我是wells，擔任過室內配線的國手，征服了電氣領域後，現在正跨大版圖到資訊界。 前情提要 Sketchup 是一款在建築、都市計畫和遊戲開發都頗有名氣的 3D 建模軟體，而 Ruby 則是一個程式語言，它可以搭配 Sketchup 達成程式化 建模的任務，近期經由系主任引薦，要開發 Sketchup 的 Extension，雖然我寫過 Ruby，但 Sketchup 則是完全沒碰過，於是利...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E4%B8%89/" class="btn btn-outline-primary" prompt="Older"><p>Ruby 搭配 Sketchup 學習筆記(三)</p></a> <a href="/posts/Ruby%E6%90%AD%E9%85%8DSketchup%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E4%BA%94/" class="btn btn-outline-primary" prompt="Newer"><p>Ruby 搭配 Sketchup 學習筆記(五)</p></a></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('.post-content img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://www.facebook.com/profile.php?id=100006651004776">張哲瑋</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/ruby/">Ruby</a> <a class="post-tag" href="/tags/sketchup/">Sketchup</a> <a class="post-tag" href="/tags/rails/">Rails</a> <a class="post-tag" href="/tags/final-project/">Final Project</a> <a class="post-tag" href="/tags/stm32/">STM32</a> <a class="post-tag" href="/tags/jekyll/">Jekyll</a> <a class="post-tag" href="/tags/ai/">AI</a> <a class="post-tag" href="/tags/c/">C++</a> <a class="post-tag" href="/tags/electrical-installations/">Electrical Installations</a> <a class="post-tag" href="/tags/gcp/">GCP</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://blog.wells.tw{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>
